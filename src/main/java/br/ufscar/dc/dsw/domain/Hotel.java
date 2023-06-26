@@ -2,28 +2,31 @@ package br.ufscar.dc.dsw.domain;
 
 public class Hotel {
 
-    private String CNPJ;
-    private String senha;
-    private String nome;
     private String email;
+    private String senha;
+    private String CNPJ;
+    private String nome;
     private String cidade;
-
-    public Hotel(Long CNPJ) {
-        this.CNPJ = CNPJ;
-    }
-
-    public Hotel(String CNPJ, String nome) {
+    
+    public Hotel(String email, String senha, String CNPJ, String nome, String cidade){
+        this.email = email;
+        this.senha = senha;
         this.CNPJ = CNPJ;
         this.nome = nome;
+        this.cidade = cidade;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
 
-
-    public Long getId() {
-        return id;
+    public String getSenha(){
+        return senha;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setSenha(String senha){
+        this.senha = senha;
     }
 
     public String getCNPJ() {
@@ -42,11 +45,11 @@ public class Hotel {
         this.nome = nome;
     }
 
-    public int getQtdeLivros() {
-        return qtdeLivros;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setQtdeLivros(int qtdeLivros) {
-        this.qtdeLivros = qtdeLivros;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 }
