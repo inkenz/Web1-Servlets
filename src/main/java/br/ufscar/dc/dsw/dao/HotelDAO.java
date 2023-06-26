@@ -1,0 +1,128 @@
+package br.ufscar.dc.dsw.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.ufscar.dc.dsw.domain.Hotel;
+
+public class HotelDAO extends GenericDAO {
+
+    public void insert(Hotel hotel) {
+
+        String sql = "insert into Hotel (email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?);";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, hotel.getCNPJ());
+            statement.setString(2, hotel.getNome());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Hotel> getAll() {
+
+        List<Hotel> listaHoteis = new ArrayList<>();
+
+        String sql = "SELECT * from Editora";
+
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                Hotel hotel = new Hotel(id, cnpj, nome);
+                hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+                listaHoteis.add(hotel);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaHoteis;
+    }
+
+    public void delete(Hotel hotel) {
+        String sql = "DELETE FROM Editora where id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, hotel.getId());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Hotel hotel) {
+        String sql = "UPDATE Editora SET cnpj = ?, nome = ?";
+        sql += " WHERE id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, hotel.getCNPJ());
+            statement.setString(2, hotel.getNome());
+            statement.setLong(3, hotel.getId());
+            
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Hotel get(Long id) {
+        Hotel hotel = null;
+        
+        String sql = "SELECT * from Editora where id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                hotel = new Hotel(id, cnpj, nome);
+                hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return hotel;
+    }
+}

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Hotel;
 import br.ufscar.dc.dsw.domain.Livro;
 
 public class LivroDAO extends GenericDAO {
@@ -56,7 +56,7 @@ public class LivroDAO extends GenericDAO {
                 Long editora_id = resultSet.getLong(6);
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
-                Editora editora = new Editora(editora_id, cnpj, nome);
+                Hotel editora = new Hotel(editora_id, cnpj, nome);
                 Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
                 listaLivros.add(livro);
             }
@@ -128,7 +128,7 @@ public class LivroDAO extends GenericDAO {
                 float preco = resultSet.getFloat("preco");
 
                 Long editoraID = resultSet.getLong("editora_id");
-                Editora editora = new EditoraDAO().get(editoraID);
+                Hotel editora = new EditoraDAO().get(editoraID);
 
                 livro = new Livro(id, titulo, autor, ano, preco, editora);
             }

@@ -1,7 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.EditoraDAO;
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Hotel;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
@@ -83,7 +83,7 @@ public class EditoraController extends HttpServlet {
 	}
 
 	private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Editora> listaEditoras = dao.getAll();
+		List<Hotel> listaEditoras = dao.getAll();
 		request.setAttribute("listaEditoras", listaEditoras);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/editora/lista.jsp");
 		dispatcher.forward(request, response);
@@ -98,7 +98,7 @@ public class EditoraController extends HttpServlet {
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
-		Editora editora = dao.get(id);
+		Hotel editora = dao.get(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/editora/formulario.jsp");
 		request.setAttribute("editora", editora);
 		dispatcher.forward(request, response);
@@ -110,7 +110,7 @@ public class EditoraController extends HttpServlet {
 		String CNPJ = request.getParameter("CNPJ");
 		String nome = request.getParameter("nome");
 
-		Editora editora = new Editora(CNPJ, nome);
+		Hotel editora = new Hotel(CNPJ, nome);
 
 		dao.insert(editora);
 		response.sendRedirect("lista");
@@ -124,7 +124,7 @@ public class EditoraController extends HttpServlet {
 		String CNPJ = request.getParameter("CNPJ");
 		String nome = request.getParameter("nome");
 
-		Editora editora = new Editora(id, CNPJ, nome);
+		Hotel editora = new Hotel(id, CNPJ, nome);
 
 		dao.update(editora);
 		response.sendRedirect("lista");
@@ -133,7 +133,7 @@ public class EditoraController extends HttpServlet {
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
 
-		Editora editora = new Editora(id);
+		Hotel editora = new Hotel(id);
 		dao.delete(editora);
 		response.sendRedirect("lista");
 	}

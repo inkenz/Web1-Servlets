@@ -30,6 +30,6 @@ abstract public class GenericDAO {
     	
     	/* Conexão banco de dados MySQL */
     	
-    	return DriverManager.getConnection("jdbc:mysql://localhost:3306/Livraria", "root", "root");
+    	return DriverManager.getConnection("jdbc:mysql://localhost:3306/PromocoesHoteis", "root", "root");
     }
 }

@@ -2,7 +2,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.EditoraDAO;
 import br.ufscar.dc.dsw.dao.LivroDAO;
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Hotel;
 import br.ufscar.dc.dsw.domain.Livro;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
@@ -93,7 +93,7 @@ public class LivroController extends HttpServlet {
 
     private Map<Long, String> getEditoras() {
         Map<Long, String> editoras = new HashMap<>();
-        for (Editora editora : new EditoraDAO().getAll()) {
+        for (Hotel editora : new EditoraDAO().getAll()) {
             editoras.put(editora.getId(), editora.getNome());
         }
         return editoras;
@@ -125,7 +125,7 @@ public class LivroController extends HttpServlet {
         Float preco = Float.parseFloat(request.getParameter("preco"));
 
         Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
+        Hotel editora = new EditoraDAO().get(editoraID);
 
         Livro livro = new Livro(titulo, autor, ano, preco, editora);
         dao.insert(livro);
@@ -143,7 +143,7 @@ public class LivroController extends HttpServlet {
         Float preco = Float.parseFloat(request.getParameter("preco"));
 
         Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
+        Hotel editora = new EditoraDAO().get(editoraID);
 
         Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
         dao.update(livro);

@@ -7,14 +7,14 @@ public class Livro {
     private String autor;
     private Integer ano;
     private Float preco;
-    private Editora editora;
+    private Hotel editora;
 
     public Livro(Long id) {
         this.id = id;
     }
 
     public Livro(String titulo, String autor, Integer ano, Float preco,
-            Editora editora) {
+            Hotel editora) {
         this.titulo = titulo;
         this.autor = autor;
         this.ano = ano;
@@ -23,7 +23,7 @@ public class Livro {
     }
 
     public Livro(Long id, String titulo, String autor, Integer ano, 
-            Float preco, Editora editora) {
+            Float preco, Hotel editora) {
         this(titulo, autor, ano, preco, editora);
         this.id = id;
     }
@@ -68,11 +68,11 @@ public class Livro {
         this.preco = preco;
     }
 
-    public Editora getEditora() {
+    public Hotel getEditora() {
         return editora;
     }
 
-    public void setEditora(Editora editora) {
+    public void setEditora(Hotel editora) {
         this.editora = editora;
     }
     
