@@ -1,32 +1,17 @@
-drop database if exists Livraria;
+drop database if exists PromocoesHoteis;
+create database PromocoesHoteis;
 
-create database Livraria;
+use PromocoesHoteis;
 
-use Livraria;
+create table Site(email varchar(256) not null, senha varchar(256) not null, endereco varchar(256) not null, nome varchar(256), telefone varchar(20), primary key (endereco));
+create table Usuario(email varchar(256) not null, senha varchar(256) not null, primary key(email));
+create table Hotel(email varchar(256) not null, senha varchar(256) not null, cnpj varchar(20), nome varchar(256), cidade varchar(256), primary key(cnpj));
+create table Promocao(id bigint not null auto_increment, endereco varchar(256) not null, cnpj_hotel varchar(20) not null, preco float, data_ini date, data_fin date, foreign key (endereco) references Site(endereco), foreign key (cnpj_hotel) references Hotel(cnpj), primary key(id)); 
 
-create table Editora(id bigint not null auto_increment, cnpj varchar(18) not null, nome varchar(256) not null, primary key (id));
+insert into Site (email, senha, endereco, nome, telefone) values ("promocoesloucas@gmail.com", "pr0m0123", "https://promocoesloucasdehoteis.com.br", "Promoções Loucas", "(16)34547289");
 
-create table Livro(id bigint not null auto_increment, titulo varchar(256) not null, autor varchar(256) not null, ano integer not null, preco float not null, editora_id bigint not null, primary key (id), foreign key (editora_id) references Editora(id));
+insert into Hotel (email, senha, cnpj, nome, cidade) values ("hotelbeiramar@bol.com", "b3ir4m4r", "55.854.538/0001-55", "Hotel Beira Mar", "São Paulo");
 
-insert into Editora(cnpj, nome) values  ('55.789.390/0008-99', 'Companhia das Letras');
+insert into Usuario (email, senha) values ("admin", "admin");
 
-insert into Editora(cnpj, nome) values ('71.150.470/0001-40', 'Record');
-
-insert into Editora(cnpj, nome) values ('32.106.536/0001-82', 'Objetiva');
-
-insert into Livro(titulo, autor, ano, preco, editora_id) values ('Ensaio sobre a Cegueira', 'José Saramago', 1995, 54.9, 1);
-
-insert into Livro(titulo, autor, ano, preco, editora_id) values  ('Cem anos de Solidão', 'Gabriel Garcia Márquez', 1977, 59.9, 2);
-
-insert into Livro(titulo, autor, ano, preco, editora_id) values ('Diálogos Impossíveis', 'Luis Fernando Verissimo', 2012, 22.9, 3);
-
-create table Usuario(id bigint not null auto_increment, nome varchar(256) not null, login varchar(20) not null unique, senha varchar(64) not null, papel varchar(10), primary key (id));
-
-insert into Usuario(nome, login, senha, papel) values ('Administrador', 'admin', 'admin', 'ADMIN');
-
-insert into Usuario(nome, login, senha, papel) values ('Usuario', 'user', 'user', 'USER');
-
-create table Compra(id bigint not null auto_increment, data varchar(10) not null, valor float not null, livro_id bigint not null, usuario_id bigint not null, primary key (id), foreign key (livro_id) references Livro(id), foreign key (usuario_id) references Usuario(id));
-
-insert into Compra(data, valor, livro_id, usuario_id) values ('30/08/2020', 10.88, 1, 2);
-
+insert into Promocao (endereco, cnpj_hotel, preco, data_ini, data_fin) values ("https://promocoesloucasdehoteis.com.br", "55.854.538/0001-55", 80.00, '2023-07-01', '2023-09-01');
