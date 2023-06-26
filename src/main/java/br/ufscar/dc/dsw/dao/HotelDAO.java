@@ -21,8 +21,11 @@ public class HotelDAO extends GenericDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement = conn.prepareStatement(sql);
-            statement.setString(1, hotel.getCNPJ());
-            statement.setString(2, hotel.getNome());
+            statement.setString(1, hotel.getEmail());
+            statement.setString(2, hotel.getSenha());
+            statement.setString(3, hotel.getCNPJ());
+            statement.setString(4, hotel.getNome());
+            statement.setString(5, hotel.getCidade());
             statement.executeUpdate();
 
             statement.close();
@@ -36,7 +39,7 @@ public class HotelDAO extends GenericDAO {
 
         List<Hotel> listaHoteis = new ArrayList<>();
 
-        String sql = "SELECT * from Editora";
+        String sql = "SELECT * from Hotel";
 
         try {
             Connection conn = this.getConnection();
@@ -44,11 +47,13 @@ public class HotelDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
-                String cnpj = resultSet.getString("cnpj");
+            	String email = resultSet.getString("email");
+            	String senha = resultSet.getString("senha");
+                String CNPJ = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
-                Hotel hotel = new Hotel(id, cnpj, nome);
-                hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+                String cidade = resultSet.getString("cidade");
+                Hotel hotel = new Hotel(email, senha, CNPJ, nome, cidade);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
                 listaHoteis.add(hotel);
             }
 
@@ -68,7 +73,7 @@ public class HotelDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, hotel.getId());
+            statement.setString(1, hotel.getCNPJ());
             statement.executeUpdate();
 
             statement.close();
@@ -79,16 +84,18 @@ public class HotelDAO extends GenericDAO {
     }
 
     public void update(Hotel hotel) {
-        String sql = "UPDATE Editora SET cnpj = ?, nome = ?";
-        sql += " WHERE id = ?";
+        String sql = "UPDATE Hotel SET email = ?, senha = ?, nome = ?, cidade = ?";
+        sql += " WHERE cnpj = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, hotel.getCNPJ());
-            statement.setString(2, hotel.getNome());
-            statement.setLong(3, hotel.getId());
+            statement.setString(1, hotel.getEmail());
+            statement.setString(2, hotel.getSenha());
+            statement.setString(3, hotel.getNome());
+            statement.setString(4, hotel.getCidade());
+            statement.setString(5, hotel.getCNPJ());
             
             statement.executeUpdate();
 
@@ -99,22 +106,26 @@ public class HotelDAO extends GenericDAO {
         }
     }
 
-    public Hotel get(Long id) {
+    //(email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?)
+    public Hotel get(String CNPJ) {
         Hotel hotel = null;
         
-        String sql = "SELECT * from Editora where id = ?";
+        String sql = "SELECT * from Hotel where cnpj = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
-            statement.setLong(1, id);
+            statement.setString(1, CNPJ);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String cnpj = resultSet.getString("cnpj");
-                String nome = resultSet.getString("nome");
-                hotel = new Hotel(id, cnpj, nome);
-                hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String nome = resultSet.getString("senha");
+                String cidade = resultSet.getString("cidade");
+                
+                hotel = new Hotel(email, senha, CNPJ, nome, cidade);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
 
             resultSet.close();
