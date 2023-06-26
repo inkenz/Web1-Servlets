@@ -20,4 +20,13 @@ insert into Livro(titulo, autor, ano, preco, editora_id) values  ('Cem anos de S
 
 insert into Livro(titulo, autor, ano, preco, editora_id) values ('Diálogos Impossíveis', 'Luis Fernando Verissimo', 2012, 22.9, 3);
 
-quit
+create table Usuario(id bigint not null auto_increment, nome varchar(256) not null, login varchar(20) not null unique, senha varchar(64) not null, papel varchar(10), primary key (id));
+
+insert into Usuario(nome, login, senha, papel) values ('Administrador', 'admin', 'admin', 'ADMIN');
+
+insert into Usuario(nome, login, senha, papel) values ('Usuario', 'user', 'user', 'USER');
+
+create table Compra(id bigint not null auto_increment, data varchar(10) not null, valor float not null, livro_id bigint not null, usuario_id bigint not null, primary key (id), foreign key (livro_id) references Livro(id), foreign key (usuario_id) references Usuario(id));
+
+insert into Compra(data, valor, livro_id, usuario_id) values ('30/08/2020', 10.88, 1, 2);
+
