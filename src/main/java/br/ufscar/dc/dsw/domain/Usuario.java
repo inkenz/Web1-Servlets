@@ -2,55 +2,24 @@ package br.ufscar.dc.dsw.domain;
 
 public class Usuario {
 
-	private Long id;
-	private String nome;
-	private String login;
+	private String email;
 	private String senha;
 	private String papel;
 
-	public Usuario(Long id) {
-		this.id = id;
-	}
 
-	public Usuario(String nome, String login, String senha, String papel) {
-		super();
-		this.nome = nome;
-		this.login = login;
+	public Usuario(String email, String senha, String papel) {
+		this.email = email;
 		this.senha = senha;
 		this.papel = papel;
 	}
 
-	public Usuario(Long id, String nome, String login, String senha, String papel) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
-		this.papel = papel;
+
+	public String getEmail() {
+		return this.email;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {

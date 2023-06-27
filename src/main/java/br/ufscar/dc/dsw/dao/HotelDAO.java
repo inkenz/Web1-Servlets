@@ -67,7 +67,7 @@ public class HotelDAO extends GenericDAO {
     }
 
     public void delete(Hotel hotel) {
-        String sql = "DELETE FROM Editora where id = ?";
+        String sql = "DELETE FROM Hotel where CNPJ = ?";
 
         try {
             Connection conn = this.getConnection();
