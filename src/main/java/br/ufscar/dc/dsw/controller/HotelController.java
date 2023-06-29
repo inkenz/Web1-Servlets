@@ -134,7 +134,7 @@ public class HotelController extends HttpServlet {
 		dao.update(hotel);
 		response.sendRedirect("lista");
 	}
-
+//
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		request.setCharacterEncoding("UTF-8");
