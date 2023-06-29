@@ -1,6 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
-import br.ufscar.dc.dsw.dao.EditoraDAO;
+import br.ufscar.dc.dsw.dao.HotelDAO;
 import br.ufscar.dc.dsw.domain.Hotel;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/editoras/*")
-public class EditoraController extends HttpServlet {
+@WebServlet(urlPatterns = "/Hotel/*")
+public class HotelController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private EditoraDAO dao;
+	private HotelDAO dao;
 
 	@Override
 	public void init() {
-		dao = new EditoraDAO();
+		dao = new HotelDAO();
 	}
 
 	@Override
@@ -83,36 +83,39 @@ public class EditoraController extends HttpServlet {
 	}
 
 	private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Hotel> listaEditoras = dao.getAll();
-		request.setAttribute("listaEditoras", listaEditoras);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/editora/lista.jsp");
+		List<Hotel> listaHoteis = dao.getAll();
+		request.setAttribute("listaHoteis", listaHoteis);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/Hotel/lista.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/editora/formulario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/Hotel/formulario.jsp");
 		dispatcher.forward(request, response);
 	}
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-		Hotel editora = dao.get(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/editora/formulario.jsp");
-		request.setAttribute("editora", editora);
+		String cnpj = Long.parseLong(request.getParameter("id"));
+		Hotel hotel = dao.get(cnpj);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/Hotel/formulario.jsp");
+		request.setAttribute("hotel", hotel);
 		dispatcher.forward(request, response);
 	}
 
 	private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
 		String CNPJ = request.getParameter("CNPJ");
 		String nome = request.getParameter("nome");
+		String cidade = request.getParameter("cidade");
+		
+		Hotel hotel = new Hotel(email, senha, CNPJ, nome, cidade);
 
-		Hotel editora = new Hotel(CNPJ, nome);
-
-		dao.insert(editora);
+		dao.insert(hotel);
 		response.sendRedirect("lista");
 	}
 
@@ -120,21 +123,29 @@ public class EditoraController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Long id = Long.parseLong(request.getParameter("id"));
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
 		String CNPJ = request.getParameter("CNPJ");
 		String nome = request.getParameter("nome");
+		String cidade = request.getParameter("cidade");
 
-		Hotel editora = new Hotel(id, CNPJ, nome);
+		Hotel hotel = new Hotel(email, senha, CNPJ, nome, cidade);
 
-		dao.update(editora);
+		dao.update(hotel);
 		response.sendRedirect("lista");
 	}
 
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-
-		Hotel editora = new Hotel(id);
-		dao.delete(editora);
+		
+		request.setCharacterEncoding("UTF-8");
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String CNPJ = request.getParameter("CNPJ");
+		String nome = request.getParameter("nome");
+		String cidade = request.getParameter("cidade");
+		
+		Hotel hotel = new Hotel(email, senha, CNPJ, nome, cidade);
+		dao.delete(hotel);
 		response.sendRedirect("lista");
 	}
 }
