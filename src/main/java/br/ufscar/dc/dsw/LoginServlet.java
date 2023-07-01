@@ -70,18 +70,27 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		HttpSession hs=request.getSession();
-		hs.setAttribute("admin", email);
+		
 		
 		if(admin.getPapel().equals("admin")){
+			hs.setAttribute("admin", email);
+			hs.setAttribute("hotel", null);
+			hs.setAttribute("site", null);
 			RequestDispatcher rd = request.getRequestDispatcher("adminpage.jsp");
 			rd.forward(request, response);
 		}
 		else if(admin.getPapel().equals("hotel")){
-			RequestDispatcher rd = request.getRequestDispatcher("hotelpage.jsp");
+			hs.setAttribute("admin", null);
+			hs.setAttribute("hotel", email);
+			hs.setAttribute("site", null);
+			RequestDispatcher rd = request.getRequestDispatcher("hoteladminpage.jsp");
 			rd.forward(request, response);
 		}
 		else if(admin.getPapel().equals("site")){
-			RequestDispatcher rd = request.getRequestDispatcher("sitepage.jsp");
+			hs.setAttribute("admin", null);
+			hs.setAttribute("hotel", null);
+			hs.setAttribute("site", email);
+			RequestDispatcher rd = request.getRequestDispatcher("siteadminpage.jsp");
 			rd.forward(request, response);
 		}
 	}

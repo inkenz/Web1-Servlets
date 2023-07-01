@@ -69,7 +69,44 @@ public class PromocaoDAO extends GenericDAO{
         }
         return listaPromocoes;
     }
+    
+    public List<Promocao> getAllHotel(String cnpj) {
 
+        List<Promocao> listaPromocoes = new ArrayList<>();
+
+        String sql = "SELECT * FROM Promocao WHERE cnpj_hotel = ?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement;
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            	System.out.print("\n\n\n oioioioioio");
+            	//(endereco, cnpj_hotel, preco, data_ini, data_fim)
+            	long id = resultSet.getLong("id");
+            	String endereco = resultSet.getString("endereco");
+                float preco = resultSet.getFloat("preco");
+                Date inicio = resultSet.getDate("data_ini");
+                Date fim = resultSet.getDate("data_fim");
+                
+                Promocao promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
+                
+                listaPromocoes.add(promocao);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaPromocoes;
+    }
+    
+    
     public void delete(Promocao promocao) {
         String sql = "DELETE FROM Promocao where id = ?";
 
@@ -111,25 +148,57 @@ public class PromocaoDAO extends GenericDAO{
     }
 
     //(email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?)
-    public Promocao get(long id) {
+    public Promocao getByCNPJ(String cnpj) {
         Promocao promocao = null;
         
-        String sql = "SELECT * from Promocao where id = ?";
+        String sql = "SELECT * from Promocao where cnpj_hotel = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
-            statement.setLong(1, id);
+            statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+            	long id = resultSet.getLong("id");
             	String endereco = resultSet.getString("endereco");
-                String CNPJ = resultSet.getString("cnpj_hotel");
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
                 
-                promocao = new Promocao(id, endereco, CNPJ, preco, inicio, fim);
+                promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return promocao;
+    }
+    
+    public Promocao getByEndereco(String url) {
+        Promocao promocao = null;
+        
+        String sql = "SELECT * from Promocao where endereco = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, url);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+            	long id = resultSet.getLong("id");
+            	String cnpj = resultSet.getString("cnpj_hotel");
+            	String endereco = resultSet.getString("endereco");
+                float preco = resultSet.getFloat("preco");
+                Date inicio = resultSet.getDate("data_ini");
+                Date fim = resultSet.getDate("data_fim");
+                
+                promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
 

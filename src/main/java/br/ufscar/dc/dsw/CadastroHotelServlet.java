@@ -69,7 +69,7 @@ public class CadastroHotelServlet extends HttpServlet {
 		
 		hdao.insert(hotel);
 
-		RequestDispatcher rd = request.getRequestDispatcher("sucesso.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("adminpage.jsp");
 		rd.forward(request, response);
 	}
 	
