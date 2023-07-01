@@ -9,13 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Hotel;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 public class HotelDAO extends GenericDAO {
 
     public void insert(Hotel hotel) {
 
         String sql = "insert into Hotel (email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?);";
-
+        Usuario u = new Usuario(hotel.getEmail(),hotel.getSenha(),"hotel");
+        UsuarioDAO udao = new UsuarioDAO();
+        udao.insert(u);
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -68,7 +71,10 @@ public class HotelDAO extends GenericDAO {
 
     public void delete(Hotel hotel) {
         String sql = "DELETE FROM Hotel where CNPJ = ?";
-
+        
+        Usuario u = new Usuario(hotel.getEmail(),hotel.getSenha(),"hotel");
+        UsuarioDAO udao = new UsuarioDAO();
+        udao.delete(u);
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -86,7 +92,9 @@ public class HotelDAO extends GenericDAO {
     public void update(Hotel hotel) {
         String sql = "UPDATE Hotel SET email = ?, senha = ?, nome = ?, cidade = ?";
         sql += " WHERE cnpj = ?";
-
+        Usuario u = new Usuario(hotel.getEmail(),hotel.getSenha(),"hotel");
+        UsuarioDAO udao = new UsuarioDAO();
+        udao.update(u);
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -107,7 +115,7 @@ public class HotelDAO extends GenericDAO {
     }
 
     //(email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?)
-    public Hotel get(String CNPJ) {
+    public Hotel getByCNPJ(String CNPJ) {
         Hotel hotel = null;
         
         String sql = "SELECT * from Hotel where cnpj = ?";
@@ -125,6 +133,36 @@ public class HotelDAO extends GenericDAO {
                 String cidade = resultSet.getString("cidade");
                 
                 hotel = new Hotel(email, senha, CNPJ, nome, cidade);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return hotel;
+    }
+    
+    public Hotel getByEmail(String Email) {
+        Hotel hotel = null;
+        
+        String sql = "SELECT * from Hotel where email = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, Email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String cnpj = resultSet.getString("cnpj");
+                String senha = resultSet.getString("senha");
+                String nome = resultSet.getString("senha");
+                String cidade = resultSet.getString("cidade");
+                
+                hotel = new Hotel(Email, senha, cnpj, nome, cidade);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
 
