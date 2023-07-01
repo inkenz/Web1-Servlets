@@ -210,4 +210,35 @@ public class PromocaoDAO extends GenericDAO{
         }
         return promocao;
     }
+    public Promocao getByDate(Date data) {
+        Promocao promocao = null;
+        
+        String sql = "SELECT * from Promocao where data_ini = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setDate(1, data);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+            	long id = resultSet.getLong("id");
+            	String cnpj = resultSet.getString("cnpj_hotel");
+            	String endereco = resultSet.getString("endereco");
+                float preco = resultSet.getFloat("preco");
+                Date inicio = resultSet.getDate("data_ini");
+                Date fim = resultSet.getDate("data_fim");
+                
+                promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return promocao;
+    }
 }
