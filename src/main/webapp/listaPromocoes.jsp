@@ -10,7 +10,7 @@
 	List<Promocao> lista = (List<Promocao>) request.getAttribute("promocoes");
 %>
 <%
-    		if(session.getAttribute("hotel")==null || lista == null){
+    		if((session.getAttribute("hotel")==null && session.getAttribute("site") ==null) || lista == null){
     			response.sendRedirect("login.jsp");
     		}
 %>

@@ -69,17 +69,17 @@ public class HotelDAO extends GenericDAO {
         return listaHoteis;
     }
 
-    public void delete(Hotel hotel) {
+    public void delete(String cnpj) {
         String sql = "DELETE FROM Hotel where CNPJ = ?";
         
-        Usuario u = new Usuario(hotel.getEmail(),hotel.getSenha(),"hotel");
+        String email = this.getByCNPJ(cnpj).getEmail();
         UsuarioDAO udao = new UsuarioDAO();
-        udao.delete(u);
+        udao.delete(email);
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, hotel.getCNPJ());
+            statement.setString(1, cnpj);
             statement.executeUpdate();
 
             statement.close();

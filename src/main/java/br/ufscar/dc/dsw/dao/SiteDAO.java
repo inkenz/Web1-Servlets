@@ -70,16 +70,16 @@ public class SiteDAO extends GenericDAO {
         return listaSites;
     }
 	
-	public void delete(Site site) {
+	public void delete(String site) {
         String sql = "DELETE FROM Site where endereco = ?";
-        Usuario u = new Usuario(site.getEmail(),site.getSenha(),"site");
+        String email = this.getByURL(site).getEmail();
         UsuarioDAO udao = new UsuarioDAO();
-        udao.delete(u);
+        udao.delete(email);
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, site.getURL());
+            statement.setString(1, site);
             statement.executeUpdate();
 
             statement.close();

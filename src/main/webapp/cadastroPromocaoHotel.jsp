@@ -3,15 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List" %>
 <%@ page import="br.ufscar.dc.dsw.domain.Site" %>
-<%
-    		if(session.getAttribute("hotel")==null){
-    			response.sendRedirect("login.jsp");
-    		}
-%>
+
 
 
 <%
 	List<Site> lista = (List<Site>) request.getAttribute("sites");
+%>
+
+<%
+    		if(session.getAttribute("hotel")==null || lista == null){
+    			response.sendRedirect("login.jsp");
+    		}
 %>
 <!DOCTYPE html>
 <html>

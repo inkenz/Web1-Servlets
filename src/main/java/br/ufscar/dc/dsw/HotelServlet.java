@@ -53,7 +53,7 @@ public class HotelServlet extends HttpServlet {
 			Hotel hotel = hdao.getByEmail(hotel_email);
 			
 			List<Promocao> lista = pdao.getAllHotel(hotel.getCNPJ());
-			System.out.print(lista.get(0).getCNPJ()+"\n\n\n\n\n\n\n\n");
+			
 			request.setAttribute("promocoes", lista);
 			RequestDispatcher rs = request.getRequestDispatcher("listaPromocoes.jsp");
 			rs.forward(request, response);
