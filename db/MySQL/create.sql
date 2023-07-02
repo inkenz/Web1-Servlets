@@ -37,12 +37,15 @@ INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("vilamistica@exampl
 
 
 -- Criação de Usuários
-insert into Usuario (email, senha, papel) values ("hotel1", "123", "hotel");
+insert into Usuario (email, senha, papel) values ("hotel1", "123", "hotel1");
 insert into Usuario (email, senha, papel) values ("admin", "admin", "admin");
 insert into Usuario (email, senha, papel) values ("fogueira", "123", "site");
 insert into Usuario (email, senha, papel) values ("site1", "123", "site");
 insert into Usuario (email, senha, papel) values ("site2", "123", "site");
 insert into Usuario (email, senha, papel) values ("site3", "123", "site");
+INSERT INTO Usuario (email, senha, papel) VALUES ("hotel2", "abc", "hotel");
+INSERT INTO Usuario (email, senha, papel) VALUES ("hotel3", "senha123", "hotel");
+
 
 -- Criação de Promoções
 insert into Promocao (endereco, cnpj_hotel, preco, data_ini, data_fim) values ("https://promocoesloucasdehoteis.com.br", "55.854.538/0001-55", 80.00, '2023-07-01', '2023-09-01');
