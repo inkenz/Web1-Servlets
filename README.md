@@ -5,7 +5,7 @@
 - Como executar
 ## Feito por:
 - Kenzo Inanami de Faria (790778)
--
+- Victor Gabriel Bonometo (800232)
 -
 ## Informações do projeto
 Trabalho para a disciplina de Desenvolvimento de Software para Web 1 da UFSCar 2023/1.  Atende aos seguintes requisitos:
