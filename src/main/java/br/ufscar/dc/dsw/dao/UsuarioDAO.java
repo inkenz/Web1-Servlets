@@ -61,7 +61,9 @@ public class UsuarioDAO extends GenericDAO {
         return listaUsuarios;
     }
 
+
     public void delete(String email) {
+
         String sql = "DELETE FROM Usuario where email = '?'";
 
         try {
