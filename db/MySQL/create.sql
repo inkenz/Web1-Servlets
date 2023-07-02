@@ -17,8 +17,23 @@ insert into Site (email, senha, endereco, nome, telefone) values ("site3@hotmail
 
 -- Criação de Hotéis
 insert into Hotel (email, senha, cnpj, nome, cidade) values ("hotelbeiramar@bol.com", "b3ir4m4r", "55.854.538/0001-55", "Hotel Beira Mar", "São Paulo");
-insert into Hotel (email, senha, cnpj, nome, cidade) values ("hotel1@hotel.com", "123", "55.854.538/0551-55", "Hotel 1", "São Paulo");
+insert into Hotel (email, senha, cnpj, nome, cidade) values ("hotel1@hotel.com", "123", "55.854.538/0551-65", "Hotel 1", "São Paulo");
 insert into Hotel (email, senha, cnpj, nome, cidade) values ("cabanadapesca@uol.com.br", "seniaseniaumdoistres", "55.854.538/0551-55", "Cabana da Pesca", "São Joaquim");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("solnascente@example.com", "senha1", "11.111.111/0001-11", "Hotel Sol Nascente", "Rio de Janeiro");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("estreladourada@example.com", "senha2", "22.222.222/0001-22", "Hotel Estrela Dourada", "São Paulo");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("paraisotropical@example.com", "senha3", "33.333.333/0001-33", "Hotel Paraíso Tropical", "Belo Horizonte");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("centralplaza@example.com", "senha4", "44.444.444/0001-44", "Hotel Central Plaza", "Brasília");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("marazul@example.com", "senha5", "55.555.555/0001-55", "Hotel Mar Azul", "Salvador");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("montanhaverde@example.com", "senha6", "66.666.666/0001-66", "Hotel Montanha Verde", "Curitiba");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("primavera@example.com", "senha7", "77.777.777/0001-77", "Hotel Primavera", "Porto Alegre");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("valeencantado@example.com", "senha8", "88.888.888/0001-88", "Hotel Vale Encantado", "Florianópolis");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("lagoaazul@example.com", "senha9", "99.999.999/0001-99", "Hotel Lagoa Azul", "Fortaleza");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("luacheia@example.com", "senha10", "10.101.010/0001-10", "Hotel Lua Cheia", "Natal");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("estreladomar@example.com", "senha11", "11.121.212/0001-11", "Hotel Estrela do Mar", "Recife");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("serrabranca@example.com", "senha12", "12.131.313/0001-12", "Hotel Serra Branca", "Gramado");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("jardimflores@example.com", "senha13", "13.141.414/0001-13", "Hotel Jardim das Flores", "Curitiba");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("praiaserena@example.com", "senha14", "14.151.515/0001-14", "Hotel Praia Serena", "Florianópolis");
+INSERT INTO Hotel (email, senha, cnpj, nome, cidade) VALUES ("vilamistica@example.com", "senha15", "15.161.616/0001-15", "Hotel Vila Mística", "Porto Seguro");
 
 
 -- Criação de Usuários
