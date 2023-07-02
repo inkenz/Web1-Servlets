@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.HotelDAO;
+import br.ufscar.dc.dsw.dao.SiteDAO;
 import br.ufscar.dc.dsw.domain.Hotel;
+import br.ufscar.dc.dsw.domain.Site;
 
 /**
  * Servlet implementation class AdminServlet
@@ -52,6 +54,9 @@ public class AdminServlet extends HttpServlet {
 			RequestDispatcher rs = request.getRequestDispatcher("editarHotel.jsp");
 			rs.forward(request, response);
 		} if(toEditSite != null) {
+			SiteDAO sdao = new SiteDAO();
+			List<Site> lista = sdao.getAll();
+			request.setAttribute("sites", lista);
 			RequestDispatcher rs = request.getRequestDispatcher("editarSite.jsp");
 			rs.forward(request, response);
 		}

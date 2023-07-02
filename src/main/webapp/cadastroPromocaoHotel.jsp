@@ -8,13 +8,11 @@
 
 <%
 	List<Site> lista = (List<Site>) request.getAttribute("sites");
+	if(session.getAttribute("hotel")==null || lista == null){
+		response.sendRedirect("login.jsp");
+	}
 %>
 
-<%
-    		if(session.getAttribute("hotel")==null || lista == null){
-    			response.sendRedirect("login.jsp");
-    		}
-%>
 <!DOCTYPE html>
 <html>
 <head>

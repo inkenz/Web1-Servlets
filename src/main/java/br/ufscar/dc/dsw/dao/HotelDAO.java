@@ -68,6 +68,36 @@ public class HotelDAO extends GenericDAO {
         }
         return listaHoteis;
     }
+    public List<Hotel> getAllOrderByCidade() {
+
+        List<Hotel> listaHoteis = new ArrayList<>();
+
+        String sql = "SELECT * from Hotel ORDER BY cidade";
+
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+            	String email = resultSet.getString("email");
+            	String senha = resultSet.getString("senha");
+                String CNPJ = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                String cidade = resultSet.getString("cidade");
+                Hotel hotel = new Hotel(email, senha, CNPJ, nome, cidade);
+                //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
+                listaHoteis.add(hotel);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaHoteis;
+    }
 
     public void delete(String cnpj) {
         String sql = "DELETE FROM Hotel where CNPJ = ?";

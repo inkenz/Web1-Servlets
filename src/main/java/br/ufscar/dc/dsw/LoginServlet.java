@@ -83,6 +83,7 @@ public class LoginServlet extends HttpServlet {
 			hs.setAttribute("admin", null);
 			hs.setAttribute("hotel", email);
 			hs.setAttribute("site", null);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("hoteladminpage.jsp");
 			rd.forward(request, response);
 		}

@@ -1,28 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Cadastrar novo hotel</title>
-</head>
-<body>
-	<h1>Cadastrar novo hotel</h1>
-	<form name="frmHotel" action="">
-		<table>
-			<tr>
-				<td><input type="text" name="email" placeholder="Email"></td>
-			</tr>
-			<tr>
-				<td><input type="password" name="senha" placeholder="Email"></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="cnpj" placeholder="Email"></td>
-			</tr>
-		</table>
-	</form>
-</body>
+    <head>
+    	<fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
+        	<title><fmt:message key="cadastro_hotel"/></title>
+        </fmt:bundle>
+    </head>
+    <body>
+    	<%
+    		if(session.getAttribute("admin")==null){
+    			response.sendRedirect("login.jsp");
+    		}
+    	%>
+        <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
+            <form action="CadastroHotel" method="POST">
+                <fieldset >
+                    <legend><fmt:message key="cadastro_hotel"/></legend>
+                    <fmt:message key="email"/><input type="text" name="usuario" /><br/>
+                    <fmt:message key="password"/><input type="password" name="senha" /><br/>
+                    <fmt:message key="CNPJ"/><input type="text" name="cnpj" /><br/>
+                    <fmt:message key="name_hotel"/><input type="text" name="nome" /><br/>
+                    <fmt:message key="city"/><input type="text" name="cidade" /><br/>
+                    <input type="submit" value="<fmt:message key="submit_cadastro"/>" />
+                </fieldset>
+            </form>
+        </fmt:bundle>
+ 		
+    
+    </body>
 </html>

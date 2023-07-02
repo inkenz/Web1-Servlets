@@ -19,7 +19,7 @@
                 <fieldset >
                     <legend><fmt:message key="cadastro_hotel"/></legend>
                     <fmt:message key="email"/><input type="text" name="usuario" /><br/>
-                    <fmt:message key="password"/><input type="text" name="senha" /><br/>
+                    <fmt:message key="password"/><input type="password" name="senha" /><br/>
                     <fmt:message key="CNPJ"/><input type="text" name="cnpj" /><br/>
                     <fmt:message key="name_hotel"/><input type="text" name="nome" /><br/>
                     <fmt:message key="city"/><input type="text" name="cidade" /><br/>

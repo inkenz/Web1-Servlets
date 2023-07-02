@@ -1,44 +1,23 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<fmt:bundle basename="message">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><fmt:message key="page.title" /></title>
-        <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
+        <title>Login</title>
     </head>
     <body>
-        <h1><fmt:message key="page.label" /></h1>
-        <c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
-                    <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
-                        </c:forEach>
-                </ul>
-            </div>
-        </c:if>
-        <form method="post" action="index.jsp">
-            <table>
-                <tr>
-                    <th><fmt:message key="user.login" />:</th>
-                    <td><input type="text" name="login"
-                               value="${param.login}"/></td>
-                </tr>
-                <tr>
-                    <th><fmt:message key="user.password" />:</th>
-                    <td><input type="password" name="senha" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"> 
-                        <input type="submit" name="bOK" value="<fmt:message key="user.login"/>">
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
+            <form action="Login" method="POST">
+                <fieldset >
+                    <legend><fmt:message key="login"/></legend>
+                    <fmt:message key="user"/><input type="text" name="usuario" /><br/>
+                    <fmt:message key="password"/><input type="password" name="senha" /><br/>
+                    <input type="submit" value="<fmt:message key="submit_login"/>" />
+                </fieldset>
+            </form>
+        </fmt:bundle>
+ 		
+    
     </body>
-</fmt:bundle>
 </html>

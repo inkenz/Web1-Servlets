@@ -35,8 +35,8 @@ public class Site{
 		return URL;
 	}
 	
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String URL) {
+		URL = URL;
 	}
 	
 	public String getSenha() {

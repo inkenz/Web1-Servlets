@@ -19,7 +19,7 @@
                 <fieldset >
                     <legend><fmt:message key="cadastro_site"/></legend>
                     <fmt:message key="email"/><input type="text" name="usuario" /><br/>
-                    <fmt:message key="password"/><input type="text" name="senha" /><br/>
+                    <fmt:message key="password"/><input type="password" name="senha" /><br/>
                     <fmt:message key="URL"/><input type="text" name="url" /><br/>
                     <fmt:message key="name_site"/><input type="text" name="nome" /><br/>
                     <fmt:message key="telefone"/><input type="text" name="telefone" /><br/>

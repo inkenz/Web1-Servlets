@@ -43,7 +43,6 @@ public class CadastroPromocaoHotelServlet extends HttpServlet {
 		String dataIniStr = request.getParameter("dataIni");
 		String dataFimStr = request.getParameter("dataFim");
 		String precoStr = request.getParameter("preco");
-		System.out.print(dataIniStr);
 		
 		if(site == null || precoStr == "")
 		{
@@ -56,37 +55,49 @@ public class CadastroPromocaoHotelServlet extends HttpServlet {
 			Date dataFim = Date.valueOf(dataFimStr);
 			
 			
-			
-			float preco = new Float(precoStr);
-			
-			HttpSession hs=request.getSession();
-			String hotel_email= (String) hs.getAttribute("hotel");
-			HotelDAO hdao = new HotelDAO();
-			Hotel hotel = hdao.getByEmail(hotel_email);
-			String cnpj = hotel.getCNPJ();
-			System.out.print("\n\n\n\n\n\n\n\n"+cnpj);
-			PromocaoDAO pdao = new PromocaoDAO();
-			
-			
-			List<Promocao> lista = pdao.getAll();
-			long id = lista.size()+1;
-			Promocao aux =pdao.getByDate(dataIni);
-			if(pdao.getByDate(dataIni) != null) {
-				if(aux.getCNPJ() == cnpj) {
-					mostrarErro("Mesma data cnpj",request, response); 
-					return;
+			try {
+				float preco = new Float(precoStr);
+
+				HttpSession hs=request.getSession();
+				String hotel_email= (String) hs.getAttribute("hotel");
+				
+				HotelDAO hdao = new HotelDAO();
+				Hotel hotel = hdao.getByEmail(hotel_email);
+				
+				String cnpj = hotel.getCNPJ();
+				
+				PromocaoDAO pdao = new PromocaoDAO();
+				
+				
+				List<Promocao> lista = pdao.getAll();
+				long id = lista.size()+1;
+				Promocao aux =pdao.getByDate(dataIni);
+				if(pdao.getByDate(dataIni) != null) {
+					if(aux.getCNPJ().equals(cnpj)) {
+						mostrarErro("Mesma data cnpj",request, response); 
+						return;
+					}
+					if(aux.getEndereco().equals(site)) {
+						mostrarErro("Mesma data site",request, response); 
+						
+						return;
+					}
 				}
-				if(aux.getEndereco() == site) {
-					mostrarErro("Mesma data site",request, response); 
-					return;
-				}
+				
+				Promocao promocao = new Promocao(id, site, cnpj, preco, dataIni, dataFim);
+						
+				pdao.insert(promocao);
+				RequestDispatcher rd = request.getRequestDispatcher("hoteladminpage.jsp");
+				rd.forward(request, response);
+			
+			
+			
+			}
+			catch(Exception e){
+				mostrarErro("Campo vazio",request, response); 
+				return;
 			}
 			
-			Promocao promocao = new Promocao(id, site, cnpj, preco, dataIni, dataFim);
-					
-			pdao.insert(promocao);
-			RequestDispatcher rd = request.getRequestDispatcher("hoteladminpage.jsp");
-			rd.forward(request, response);
 		}
 		catch(Exception e){
 			mostrarErro("Campo vazio",request, response); 
@@ -101,9 +112,9 @@ public class CadastroPromocaoHotelServlet extends HttpServlet {
 		String mensagem_erro = "<font color=red size=2>";
 		if(motivo.equals("Campo vazio")) {
 			if(local.toString().equals("pt_BR")) 
-				mensagem_erro=mensagem_erro+"Preencha todos os campos";
+				mensagem_erro=mensagem_erro+"Preencha todos os campos corretamente";
 			else if(local.toString().equals("en_US"))
-				mensagem_erro=mensagem_erro+"Fill all fields";
+				mensagem_erro=mensagem_erro+"Fill all fields correctly";
 			else 
 				mensagem_erro=mensagem_erro+"ERROR";
 		}
