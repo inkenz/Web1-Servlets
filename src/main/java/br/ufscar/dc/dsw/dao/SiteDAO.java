@@ -9,12 +9,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufscar.dc.dsw.domain.Promocao;
+import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.domain.Site;
 import br.ufscar.dc.dsw.domain.Usuario;
 
 
 public class SiteDAO extends GenericDAO {
-	
+
 	public void insert(Site site){
 		String sql = "insert into Site (email, senha, endereco, nome, telefone) values (?, ?, ?, ?, ?);";
 		Usuario u = new Usuario(site.getEmail(),site.getSenha(),"site");
@@ -38,7 +40,7 @@ public class SiteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
 	}
-	
+
 	public List<Site> getAll() {
 
         List<Site> listaSites = new ArrayList<>();
@@ -57,7 +59,7 @@ public class SiteDAO extends GenericDAO {
                 String nome = resultSet.getString("nome");
                 String telefone = resultSet.getString("telefone");
                 Site site = new Site(email, senha, endereco, nome, telefone);
-                
+
                 listaSites.add(site);
             }
 
@@ -69,13 +71,24 @@ public class SiteDAO extends GenericDAO {
         }
         return listaSites;
     }
-	
+
 	public void delete(String site) {
         String sql = "DELETE FROM Site where endereco = ?";
         String email = this.getByURL(site).getEmail();
         UsuarioDAO udao = new UsuarioDAO();
         udao.delete(email);
-        try {
+
+				boolean hasPromocoes = true;
+        PromocaoDAO pdao = new PromocaoDAO();
+        Promocao promo = null;
+        while(hasPromocoes){
+            promo = pdao.getByEndereco(site);
+            if(promo != null){
+              pdao.delete(promo);
+            } else hasPromocoes = false;
+        }
+
+				try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -88,7 +101,7 @@ public class SiteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-	
+
 	public void update(Site site) {
         String sql = "UPDATE Site SET email = ?, senha = ?, nome = ?, telefone = ?";
         sql += " WHERE endereco = ?";
@@ -104,7 +117,7 @@ public class SiteDAO extends GenericDAO {
             statement.setString(3, site.getNome());
             statement.setString(4, site.getTelefone());
             statement.setString(5, site.getURL());
-            
+
             statement.executeUpdate();
 
             statement.close();
@@ -113,16 +126,16 @@ public class SiteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-	
+
 	public Site getByURL(String endereco) {
         Site site = null;
-        
+
         String sql = "SELECT * from Site where endereco = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setString(1, endereco);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -130,7 +143,7 @@ public class SiteDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
                 String telefone = resultSet.getString("telefone");
-                
+
                 site = new Site(email, senha, endereco, nome, telefone);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
@@ -143,16 +156,16 @@ public class SiteDAO extends GenericDAO {
         }
         return site;
     }
-	
+
 	public Site getByEmail(String email) {
         Site site = null;
-        
+
         String sql = "SELECT * from Site where email = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -160,7 +173,7 @@ public class SiteDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String nome = resultSet.getString("nome");
                 String telefone = resultSet.getString("telefone");
-                
+
                 site = new Site(email, senha, endereco, nome, telefone);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }

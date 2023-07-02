@@ -12,7 +12,7 @@ import java.util.List;
 import br.ufscar.dc.dsw.domain.Promocao;
 
 public class PromocaoDAO extends GenericDAO{
-	
+
     public void insert(Promocao promocao) {
 
         String sql = "insert into Promocao (id, endereco, cnpj_hotel, preco, data_ini, data_fim) values (?, ?, ?, ?, ?, ?);";
@@ -22,7 +22,18 @@ public class PromocaoDAO extends GenericDAO{
             PreparedStatement statement;
 
             statement = conn.prepareStatement(sql);
-            statement.setLong(1, promocao.getId());
+
+						List<Promocao> lista = this.getAll();
+						Promocao p = null;
+						long id=0;
+						for(id =0; id<lista.size()+1; id++){
+								p = this.getById(id);
+								if(p==null) break;
+						}
+
+
+
+            statement.setLong(1, id);
             statement.setString(2, promocao.getEndereco());
             statement.setString(3, promocao.getCNPJ());
             statement.setFloat(4, promocao.getPreco());
@@ -57,7 +68,7 @@ public class PromocaoDAO extends GenericDAO{
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
                 Promocao promocao = new Promocao(id, endereco, CNPJ, preco, inicio, fim);
-                
+
                 listaPromocoes.add(promocao);
             }
 
@@ -69,7 +80,7 @@ public class PromocaoDAO extends GenericDAO{
         }
         return listaPromocoes;
     }
-    
+
     public List<Promocao> getAllHotel(String cnpj) {
 
         List<Promocao> listaPromocoes = new ArrayList<>();
@@ -91,9 +102,9 @@ public class PromocaoDAO extends GenericDAO{
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
-                
+
                 Promocao promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
-                
+
                 listaPromocoes.add(promocao);
             }
 
@@ -105,7 +116,7 @@ public class PromocaoDAO extends GenericDAO{
         }
         return listaPromocoes;
     }
-    
+
 
     public List<Promocao> getAllSite(String url) {
 
@@ -121,16 +132,15 @@ public class PromocaoDAO extends GenericDAO{
             statement.setString(1, url);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-            	System.out.print("\n\n\n oioioioioio");
             	//(endereco, cnpj_hotel, preco, data_ini, data_fim)
             	long id = resultSet.getLong("id");
             	String cnpj = resultSet.getString("cnpj_hotel");
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
-                
+
                 Promocao promocao = new Promocao(id, url, cnpj, preco, inicio, fim);
-                
+
                 listaPromocoes.add(promocao);
             }
 
@@ -142,7 +152,7 @@ public class PromocaoDAO extends GenericDAO{
         }
         return listaPromocoes;
     }
-    
+
     public void delete(Promocao promocao) {
         String sql = "DELETE FROM Promocao where id = ?";
 
@@ -151,6 +161,40 @@ public class PromocaoDAO extends GenericDAO{
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setLong(1, promocao.getId());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+		public void deleteBySite(String endereco) {
+        String sql = "DELETE FROM Promocao where endereco = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, endereco);
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+		public void deleteByHotel(String cnpj_hotel) {
+        String sql = "DELETE FROM Promocao where cnpj_hotel = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cnpj_hotel);
             statement.executeUpdate();
 
             statement.close();
@@ -186,13 +230,13 @@ public class PromocaoDAO extends GenericDAO{
     //(email, senha, cnpj, nome, cidade) values (?, ?, ?, ?, ?)
     public Promocao getByCNPJ(String cnpj) {
         Promocao promocao = null;
-        
+
         String sql = "SELECT * from Promocao where cnpj_hotel = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -201,7 +245,7 @@ public class PromocaoDAO extends GenericDAO{
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
-                
+
                 promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
@@ -214,16 +258,16 @@ public class PromocaoDAO extends GenericDAO{
         }
         return promocao;
     }
-    
+
     public Promocao getByEndereco(String url) {
         Promocao promocao = null;
-        
+
         String sql = "SELECT * from Promocao where endereco = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setString(1, url);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -233,7 +277,7 @@ public class PromocaoDAO extends GenericDAO{
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
-                
+
                 promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
@@ -246,15 +290,46 @@ public class PromocaoDAO extends GenericDAO{
         }
         return promocao;
     }
+
+		public Promocao getById(Long id) {
+        Promocao promocao = null;
+
+        String sql = "SELECT * from Promocao where id = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+	            	String cnpj = resultSet.getString("cnpj_hotel");
+	            	String endereco = resultSet.getString("endereco");
+	              float preco = resultSet.getFloat("preco");
+	              Date inicio = resultSet.getDate("data_ini");
+	              Date fim = resultSet.getDate("data_fim");
+
+	              promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return promocao;
+    }
+
     public Promocao getByDate(Date data) {
         Promocao promocao = null;
-        
+
         String sql = "SELECT * from Promocao where data_ini = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setDate(1, data);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -264,7 +339,7 @@ public class PromocaoDAO extends GenericDAO{
                 float preco = resultSet.getFloat("preco");
                 Date inicio = resultSet.getDate("data_ini");
                 Date fim = resultSet.getDate("data_fim");
-                
+
                 promocao = new Promocao(id, endereco, cnpj, preco, inicio, fim);
                 //hotel.setQtdeLivros(new LivroDAO().countByEditora(id));
             }
