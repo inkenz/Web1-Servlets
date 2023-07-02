@@ -33,8 +33,8 @@ public class CadastroSiteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-response.setContentType("text/html");
-		
+		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
 		String email = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
 		String url =  request.getParameter("url");

@@ -15,7 +15,7 @@
     		}
     	%>
         <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="CadastroSite" method="POST">
+            <form action="CadastroSite" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <legend><fmt:message key="cadastro_site"/></legend>
                     <fmt:message key="email"/><input type="text" name="usuario" /><br/>
@@ -27,7 +27,7 @@
                 </fieldset>
             </form>
         </fmt:bundle>
- 		
-    
+
+
     </body>
 </html>

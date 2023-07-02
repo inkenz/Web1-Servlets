@@ -38,7 +38,8 @@ public class CadastroPromocaoHotelServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		response.setContentType("text/html");		
+		request.setCharacterEncoding("UTF-8");		
 		String site = request.getParameter("site");
 		String dataIniStr = request.getParameter("dataIni");
 		String dataFimStr = request.getParameter("dataFim");

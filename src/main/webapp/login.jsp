@@ -8,7 +8,7 @@
     </head>
     <body>
         <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="Login" method="POST">
+            <form action="Login" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <legend><fmt:message key="login"/></legend>
                     <fmt:message key="user"/><input type="text" name="usuario" /><br/>
@@ -17,7 +17,7 @@
                 </fieldset>
             </form>
         </fmt:bundle>
- 		
-    
+
+
     </body>
 </html>

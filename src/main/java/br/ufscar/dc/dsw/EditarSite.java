@@ -33,6 +33,8 @@ public class EditarSite extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		String editar = request.getParameter("EDITAR");
 		String apagar = request.getParameter("APAGAR");
 		

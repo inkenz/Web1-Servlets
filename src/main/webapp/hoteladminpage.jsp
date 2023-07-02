@@ -14,7 +14,7 @@
     		}
     	%>
 		<fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="HotelServlet" method="POST">
+            <form action="HotelServlet" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <input type="submit" value="<fmt:message key="cadastro_promocao"/>" name="BT1"/>
                     <input type="submit" value="<fmt:message key="listar_promocao"/>" name="BT2"/>

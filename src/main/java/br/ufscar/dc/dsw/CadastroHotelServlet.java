@@ -35,7 +35,7 @@ public class CadastroHotelServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		
+		request.setCharacterEncoding("UTF-8");		
 		String email = request.getParameter("usuario");
 		String senha = request.getParameter("senha");
 		String cnpj =  request.getParameter("cnpj");

@@ -21,9 +21,9 @@
         </fmt:bundle>
     </head>
     <body>
-    	
+
         <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="CadastroPromocaoHotel" method="POST">
+            <form action="CadastroPromocaoHotel" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <legend><fmt:message key="cadastro_promocao"/></legend>
                     <select name="site">
@@ -33,16 +33,16 @@
                     		</option>
                     	<%} %>
                     </select> <br/>
-                    
+
                     <fmt:message key="data_inicial"/><input type="date" name="dataIni"/><br/>
                     <fmt:message key="data_final"/><input type="date" name="dataFim"/><br/>
                     <fmt:message key="preco"/><input type="number" name="preco" min="0" step="0.01" /><br/>
-                    
+
                     <input type="submit" value="<fmt:message key="submit_cadastro"/>" />
                 </fieldset>
             </form>
         </fmt:bundle>
- 		
-    
+
+
     </body>
 </html>

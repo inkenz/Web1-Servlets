@@ -14,7 +14,7 @@
     		}
     	%>
 		<fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="SiteServlet" method="POST">
+            <form action="SiteServlet" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <input type="submit" value="<fmt:message key="listar_promocao"/>" name="BT1"/>
                 </fieldset>

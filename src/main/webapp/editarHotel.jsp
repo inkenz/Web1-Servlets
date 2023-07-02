@@ -21,7 +21,7 @@
 </head>
 <body>
 	<fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="EditarHotel" method="POST">
+            <form action="EditarHotel" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <legend><fmt:message key="editar_hotel"/></legend>
                     <select name="hotel">

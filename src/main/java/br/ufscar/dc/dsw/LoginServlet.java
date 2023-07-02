@@ -35,9 +35,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Locale local = request.getLocale();
-		
-		
+		Locale local = request.getLocale();	
+		request.setCharacterEncoding("UTF-8");	
 		PrintWriter pw = response.getWriter(); 
 		response.setContentType("text/html");
 		

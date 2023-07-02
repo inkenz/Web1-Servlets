@@ -9,7 +9,7 @@
     </head>
     <body>
         <fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-            <form action="Inicio" method="POST">
+            <form action="Inicio" method="POST" accept-charset="UTF-8">
                 <fieldset >
                     <legend><fmt:message key="pagina_inicial"/></legend>
                     <input type="submit" value="<fmt:message key="login"/>" name="BT1"/><br/>

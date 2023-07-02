@@ -28,7 +28,7 @@
 </head>
 <body>
 	<fmt:bundle basename="br.ufscar.dc.dsw.resources.message">
-		<form action="Inicio" method="POST">
+		<form action="Inicio" method="POST" accept-charset="UTF-8">
                 <fieldset >
                 	<input type="submit" value="<fmt:message key="hotel_sem_ordem"/>" name="BT2"/><br/>
                     <input type="submit" value="<fmt:message key="hotel_por_cidade"/>" name="BT3"/><br/>
