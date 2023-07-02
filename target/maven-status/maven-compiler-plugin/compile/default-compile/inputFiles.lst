@@ -1,16 +1,17 @@
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/controller/LivroController.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/util/Erro.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/controller/UsuarioController.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/domain/Editora.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/controller/IndexController.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/dao/CompraDAO.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/dao/LivroDAO.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/domain/Compra.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/controller/EditoraController.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/domain/Livro.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/AcessaBD.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/controller/CompraController.java
-/home/yuri/Dropbox/2023/2023-1/Desenvolvimento de software web/Trabalho 1/Web1-Servlets/src/main/java/br/ufscar/dc/dsw/dao/EditoraDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Site.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/AcessaBD.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/dao/HotelDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/controller/HotelController.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Compra.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Promocao.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Livro.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/dao/PromocaoDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/dao/SiteDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/domain/Hotel.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/controller/UsuarioController.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/util/Erro.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/LoginServlet.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/dao/UsuarioDAO.java
+/home/kenzo/eclipse-workspace/Web1-Servlets1/src/main/java/br/ufscar/dc/dsw/controller/IndexController.java

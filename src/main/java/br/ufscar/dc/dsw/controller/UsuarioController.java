@@ -16,7 +16,7 @@ import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = "/usuarios/*")
 public class UsuarioController extends HttpServlet {
-
+/*
 	private static final long serialVersionUID = 1L;
 
 	private UsuarioDAO dao;
@@ -140,5 +140,5 @@ public class UsuarioController extends HttpServlet {
 		Usuario usuario = new Usuario(id);
 		dao.delete(usuario);
 		response.sendRedirect("lista");
-	}
+	}*/
 }

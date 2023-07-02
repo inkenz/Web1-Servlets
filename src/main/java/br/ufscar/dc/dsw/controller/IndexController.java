@@ -15,7 +15,7 @@ import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/logout.jsp" })
 public class IndexController extends HttpServlet {
-
+/*
 	private static final long serialVersionUID = 1L;
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -72,4 +72,5 @@ public class IndexController extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
+	*/
 }

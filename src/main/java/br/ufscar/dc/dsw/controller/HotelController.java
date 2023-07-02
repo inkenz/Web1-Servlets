@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/Hotel/*")
 public class HotelController extends HttpServlet {
-
+/*
 	private static final long serialVersionUID = 1L;
 
 	private HotelDAO dao;
@@ -148,4 +148,5 @@ public class HotelController extends HttpServlet {
 		dao.delete(hotel);
 		response.sendRedirect("lista");
 	}
+	*/
 }
