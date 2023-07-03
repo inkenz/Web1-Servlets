@@ -6,7 +6,7 @@
 ## Feito por:
 - Kenzo Inanami de Faria (790778)
 - Victor Gabriel Bonometo (800232)
--
+- Yuri Nicolau Freire (752737)
 ## Informações do projeto
 Trabalho para a disciplina de Desenvolvimento de Software para Web 1 da UFSCar 2023/1.  Atende aos seguintes requisitos:
 - R1: CRUD de sites de reserva (requer login de administrador).
